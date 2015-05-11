@@ -51,10 +51,6 @@
 				if(err) {
 					cb(err);
 				} else {
-
-					self.user = body.body.data;
-					console.log(body.body);
-
 					cb(null, body.body);
 				}
 			});
