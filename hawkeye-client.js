@@ -40,12 +40,13 @@
 		{
 			var params = {
 				form   : params,
+				qs 	   : params,
 				json   : true,
 				uri    : host + endpoints[endpoint_code].url,
 				method : endpoints[endpoint_code].method
 			};
 
-			// console.log(params);
+			console.log(params);
 
 			request(params, function(err, body) {
 				if(err) {

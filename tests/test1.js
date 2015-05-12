@@ -20,8 +20,12 @@ var hc = new HC({
 			method 		: 'post'
 		},
 		'pullOutbox' 		: {
-			url		 	: '/sms/pull',
-			method 		: 'get'
+			url		 	: '/sms/outbox',
+			method 		: 'GET'
+		},
+		'inbox' 		: {
+			url		 	: '/sms/inbox',
+			method 		: 'GET'
 		}
 	}
 });
@@ -59,13 +63,23 @@ function sendMessage(param)
 	});
 }
 
+function getInbox(param)
+{
+	param.token = token;
+	hc.execute('inbox', param, function(err, data){
+		console.log(err, data);
+	});
+}
+
 // we are now logged in
 function run()
 {
-	sendMessage({
-		to 		: '09178802642',
-		message : 'hello there'
-	});
+	// sendMessage({
+	// 	to 		: '09178802642',
+	// 	message : 'hello there'
+	// });
+
+	getInbox({});
 }
 
 login();
