@@ -27,6 +27,9 @@ var hc = new HC({
 			url		 	: '/sms/inbox',
 			method 		: 'GET'
 		}
+	},
+	default_params : {
+		ardee : 'test',
 	}
 });
 

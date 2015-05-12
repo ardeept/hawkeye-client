@@ -2,6 +2,7 @@
 	"use strict";
 
 	var request = require('request');
+	var _ = require('lodash');
 
 	var HawkeyeClient = function(config) {
 		var self = this;
@@ -38,6 +39,11 @@
 
 		self.execute = function(endpoint_code, params, cb)
 		{
+			if(config.default_params)
+			{
+				params = _.merge(params, config.default_params);
+			}
+
 			var params = {
 				form   : params,
 				qs 	   : params,
@@ -45,6 +51,7 @@
 				uri    : host + endpoints[endpoint_code].url,
 				method : endpoints[endpoint_code].method
 			};
+
 
 			console.log(params);
 
