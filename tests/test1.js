@@ -1,7 +1,7 @@
 var HC = require('../hawkeye-client.js');
 
 var hc = new HC({
-	host: "http://api.he.loc/public",
+	host: "http://api.he.loc:20002/public",
 	endpoints : {
 		'test' : {
 			url : '/test',
