@@ -55,11 +55,21 @@
 
 			console.log(params);
 
-			request(params, function(err, body) {
+			request(params, function(err, r, body) {
 				if(err) {
 					cb(err);
 				} else {
-					cb(null, body.body);
+
+					if(r.statusCode == 200)
+					{
+						cb(null, body);	
+					}
+					else
+					{
+						cb(new Error(r.statusCode), body );
+					}
+
+					
 				}
 			});
 		}
