@@ -53,10 +53,9 @@
 
 				var params = {
 					form   : endpoints['auth'].params,
-					qs 	   : endpoints['auth'].params,
 					json   : true,
 					uri    : host + endpoints['auth'].url,
-					method : endpoints['auth'].method
+					method : 'post'
 				};
 
 				request(params, function(err, r, body) {
