@@ -137,8 +137,8 @@
 			{
 				// let's add as header
 				api_params['headers'] = {
-					"token": self.auth.user_token,
-					"user-id": self.auth.user_id
+					"token" 	: self.auth_user_token,
+					"user-id" 	: self.auth_user_id
 				};
 			}
 
