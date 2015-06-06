@@ -26,6 +26,14 @@ var hc = new HC({
 		'inbox' 		: {
 			url		 	: '/sms/inbox',
 			method 		: 'GET'
+		},
+		'auth' 		    : {
+			url  		: '/ajax/verify/login',
+			method 		: 'POST',
+			params 		: {
+				'username' : 'inbound@yondu.com',
+				'password' : '1234'
+			}
 		}
 	},
 	default_params : {

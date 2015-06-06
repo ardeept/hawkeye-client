@@ -7,6 +7,8 @@
 	var HawkeyeClient = function(config) {
 		var self = this;
 
+
+
 		// console.log(config);
 
 		// define all endpoints here
@@ -34,10 +36,81 @@
 		// this will be set to true when a success test is made
 		self.connected		 	= false;
 
+		self.with_authentication = config.with_authentication || false;
+		self.authenticated 		 = false;
+
+
+
 		var endpoints = config.endpoints;
 
 
+
+		self.authenticate = function(cb)
+		{
+			// make sure there is an auth endpoint set
+			if(endpoints['auth'])
+			{
+
+				var params = {
+					form   : endpoints[endpoint_code].params,
+					qs 	   : endpoints[endpoint_code].params,
+					json   : true,
+					uri    : host + endpoints[endpoint_code].url,
+					method : endpoints[endpoint_code].method
+				};
+
+				request(params, function(err, r, body) {
+					if(err) {
+						cb(err);
+					} else {
+
+						if(r.statusCode == 200)
+						{
+							// no error code, let's get the token
+							self.auth_user_token 	= body.data.token;
+							self.auth_user_id 		= body.data.id;
+
+							console.log("Auth OK", body.data);
+
+							cb(null, body);	
+						}
+						else
+						{
+
+							console.log("FAILED_TO_AUTHENTICATE");
+							process.exit(1);
+							return false;
+						}
+					}
+				});
+			}
+			else
+			{
+				// with_authentication set to true, but there is non auth endpoint set
+				console.log("CANT_AUTHENTICATE");
+				process.exit(1);
+				return false;
+			}
+		}
+
+
 		self.execute = function(endpoint_code, params, cb)
+		{
+			if(self.with_authentication && !self.authenticated)
+			{
+				// authenticate first
+				self.authenticate(function(err, data){
+					self._execute(endpoint_code, params, cb);	
+				});
+			}
+			else
+			{
+				
+			}
+		}
+
+
+		self._execute = function(endpoint_code, params, cb)
 		{
 			if(config.default_params)
 			{
@@ -49,11 +122,18 @@
 				qs 	   : params,
 				json   : true,
 				uri    : host + endpoints[endpoint_code].url,
-				method : endpoints[endpoint_code].method
+				method : endpoints[endpoint_code].method,
+				
 			};
 
-
-			console.log(params);
+			if(self.with_authentication)
+			{
+				// let's add as header
+				params['headers'] = {
+					"token": self.auth.user_token,
+					"user-id": self.auth.user_id
+				};
+			}
 
 			request(params, function(err, r, body) {
 				if(err) {
