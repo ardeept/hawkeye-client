@@ -78,7 +78,7 @@
 						{
 
 
-							console.log("FAILED_TO_AUTHENTICATE", err);
+							console.log("FAILED_TO_AUTHENTICATE", body);
 							process.exit(1);
 							return false;
 						}
