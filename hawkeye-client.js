@@ -71,6 +71,8 @@
 
 							console.log("Auth OK", body.data);
 
+							self.authenticated = true;
+
 							cb(null, body);	
 						}
 						else
