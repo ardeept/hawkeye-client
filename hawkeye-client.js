@@ -52,11 +52,11 @@
 			{
 
 				var params = {
-					form   : endpoints[endpoint_code].params,
-					qs 	   : endpoints[endpoint_code].params,
+					form   : endpoints['auth'].params,
+					qs 	   : endpoints['auth'].params,
 					json   : true,
-					uri    : host + endpoints[endpoint_code].url,
-					method : endpoints[endpoint_code].method
+					uri    : host + endpoints['auth'].url,
+					method : endpoints['auth'].method
 				};
 
 				request(params, function(err, r, body) {
