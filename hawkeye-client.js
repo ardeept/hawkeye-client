@@ -98,7 +98,7 @@
 
 		self.execute = function(endpoint_code, params, cb)
 		{
-			if(self.with_authentication && !self.authenticated)
+			if(self.with_authentication && self.authenticated == false)
 			{
 				// authenticate first
 				self.authenticate(function(err, data){
