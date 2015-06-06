@@ -100,6 +100,7 @@
 		{
 			if(self.with_authentication && self.authenticated == false)
 			{
+				console.log("auth first", self.with_authentication, self.authenticated);
 				// authenticate first
 				self.authenticate(function(err, data){
 					self._execute(endpoint_code, params, cb);	
