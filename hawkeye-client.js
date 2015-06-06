@@ -117,25 +117,32 @@
 				params = _.merge(params, config.default_params);
 			}
 
-			var params = {
-				form   : params,
-				qs 	   : params,
+			var api_params = {
 				json   : true,
 				uri    : host + endpoints[endpoint_code].url,
 				method : endpoints[endpoint_code].method,
 				
 			};
 
+			if(api_params.method == 'get')
+			{
+				api_params['qs'] = params;
+			}
+			else
+			{
+				api_params['form'] = params;
+			}
+
 			if(self.with_authentication)
 			{
 				// let's add as header
-				params['headers'] = {
+				api_params['headers'] = {
 					"token": self.auth.user_token,
 					"user-id": self.auth.user_id
 				};
 			}
 
-			request(params, function(err, r, body) {
+			request(api_params, function(err, r, body) {
 				if(err) {
 					cb(err);
 				} else {
