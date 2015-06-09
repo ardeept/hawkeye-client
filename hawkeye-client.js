@@ -140,10 +140,12 @@
 			{
 				// let's add as header
 				api_params['headers'] = {
-					"token" 	: self.auth_user_token,
-					"user-id" 	: self.auth_user_id
+					"Token" 	: self.auth_user_token,
+					"User-Id" 	: self.auth_user_id
 				};
 			}
+
+			console.log(api_params);
 
 			request(api_params, function(err, r, body) {
 				if(err) {
