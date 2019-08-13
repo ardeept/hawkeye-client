@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/ardeept/hawkeye-client",
   "dependencies": {
-    "lodash": "^3.8.0"
+    "lodash": "^4.17.13"
   }
 }
